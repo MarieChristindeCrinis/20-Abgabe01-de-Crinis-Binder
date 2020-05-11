@@ -1,5 +1,9 @@
 package at.fhj.iit;
 
+/**
+ * If no alcohol is found in the ingredients list this exception should be thrown.
+ *
+ */
 public class AlcoholNotFoundException extends Exception  {
 
     private String weakMindedCocktailName;

@@ -58,6 +58,9 @@ public class CocktailTest {
         assertEquals(expected, result);
     }
 
+    /**
+     * tests if the exception for non-alcoholic cocktails and the message of it, works properly.
+     */
     @Test
     @DisplayName("Testing recipe method with no alcohol")
     public void testRecipeMethodExpectException(){
