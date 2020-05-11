@@ -19,17 +19,26 @@ public class Cocktail extends Drink{
 
     @Override
     public double getVolume() {
-        return 0;
+        return this.ingredients
+                .stream()
+                .map(x -> x.getVolume())
+                .reduce(0.0, Double::sum);
     }
 
     @Override
     public double getAlcoholPercent() {
-        return 0;
+        return this.ingredients
+                .stream()
+                .map(x -> x.getAlcoholPercent())
+                .max(Double::compareTo)
+                .orElse(0.0);
     }
 
     @Override
     public boolean isAlcoholic() {
-        return false;
+        return this.ingredients
+                .stream()
+                .anyMatch(x -> x.getAlcoholPercent() > 0);
     }
 
     /**
@@ -57,10 +66,25 @@ public class Cocktail extends Drink{
     }
 
     /**
+     * Returns the count of ingredients
+     * @return the count of ingredients
+     */
+    public int getIngredientCount(){
+        return this.ingredients.size();
+    }
+
+    /**
      * Returns the recipe for this cocktail 
      * @return the recipe for the cocktail
      */
     public String recipe() {
 
+        String str = "";
+
+        for(Liquid c : ingredients){
+
+            str += String.format("%-8s | %.0f ml\n" , c.getName(), c.getVolume()*100);
+        }
+        return str;
     }
 }
