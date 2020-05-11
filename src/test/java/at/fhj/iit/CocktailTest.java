@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Testing Cocktail implementation")
 public class CocktailTest {
 
-    private Liquid alcohol, softdrink;
+    private Liquid alcohol, softdrink, iceCream;
 
     /**
      * inits an alcoholic and nonalcoholic liquid for EACH test
@@ -23,7 +23,7 @@ public class CocktailTest {
         // SETUP PHASE
         alcohol = new Liquid("Rum", 0.04, 80);
         softdrink = new Liquid("Cola", 0.2, 0);
-
+        iceCream = new Liquid("Softeis", 0.3, 0);
     }
 
     /**
@@ -49,7 +49,29 @@ public class CocktailTest {
         cocktail.addIngredient(alcohol);
         cocktail.addIngredient(softdrink);
         String expected = "Rum      | 4 ml\nCola     | 20 ml\n";
-        assertEquals(expected, cocktail.recipe());
+        String result = "";
+        try{
+            result = cocktail.recipe();
+        } catch(AlcoholNotFoundException ex) {
+            assert(false);
+        }
+        assertEquals(expected, result);
+    }
+
+    @Test
+    @DisplayName("Testing recipe method with no alcohol")
+    public void testRecipeMethodExpectException(){
+
+        Cocktail cocktail = new Cocktail("Taube-Nüsschen Becher");
+        cocktail.addIngredient(iceCream);
+        String expected = "Taube-Nüsschen Becher is not a proper cocktail due to the lack of alcohol.";
+        try {
+            cocktail.recipe();
+            assert(false);
+        } catch(AlcoholNotFoundException ex) {
+            assertEquals(expected, ex.getMessage());
+        }
+
     }
 
     /**

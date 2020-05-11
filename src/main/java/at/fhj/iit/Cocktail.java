@@ -77,13 +77,18 @@ public class Cocktail extends Drink{
      * Returns the recipe for this cocktail 
      * @return the recipe for the cocktail
      */
-    public String recipe() {
+    public String recipe() throws AlcoholNotFoundException{
 
         String str = "";
-
+        boolean alcoholic = false;
         for(Liquid c : ingredients){
-
+            if(c.getAlcoholPercent()> 0) {
+                alcoholic = true;
+            }
             str += String.format("%-8s | %.0f ml\n" , c.getName(), c.getVolume()*100);
+        }
+        if(!alcoholic) {
+            throw new AlcoholNotFoundException(this.name);
         }
         return str;
     }
