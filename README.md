@@ -16,7 +16,7 @@ test class *CocktailTest* to fill the Ingredient List.
 ## Special Code
 
 For the *Cocktails* class we used the recipe method:
-'''
+```
     public String recipe() throws AlcoholNotFoundException{
            String str = "";
            boolean alcoholic = false;
@@ -31,11 +31,11 @@ For the *Cocktails* class we used the recipe method:
            }
            return str;
       }
-'''
+```
 
 In Testing we used a setup mehtod in order to have all the ingredients in one central
 place.
-'''
+```
     @BeforeEach
     void setup() {
         // SETUP PHASE
@@ -43,6 +43,6 @@ place.
         softdrink = new Liquid("Cola", 0.2, 0);
         iceCream = new Liquid("Softeis", 0.3, 0);
     }
-'''
+```
 Note that we use a *@BeforeEach* Annotation in order to execute the *setup()* method
 before executing each test.
